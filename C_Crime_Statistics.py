@@ -636,7 +636,7 @@ def option3():
     print(" Assault:{0:0.4}".format(assault1 / assault ))
     print(" Battery:{0:0.4}".format(battery1 / battery))
     print(" Burglary:{0:0.4}".format(burglary1 / burglary))
-    print(" Sexual Assault:{0:0.4}".format(sexual_assault/sexual_assault))
+    print(" Sexual Assault:{0:0.4}".format(sexual_assault1 /sexual_assault))
     print(" Narcotics:{0:0.4}".format(narcotics1 /narcotics))
     print(" Criminal Damage:{0:0.4}".format(criminal_damage1/criminal_damage))
     print(" Deceptive Practice:{0:0.4}".format(deceptive_practice1 /deceptive_practice))

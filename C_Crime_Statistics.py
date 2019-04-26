@@ -4,23 +4,27 @@ def main():
     number = 4
     ##
     while number != 0:
-        print("1 - for statictis based off of crime, 2- for statistics based off of district, 3- General Statistics")    
+        print("Instructions- Choose of of the following:\n 1 - for statistics based off of chosen district\n 2 - for statistics based off type of crime\n 0 - to quit\n")
+        print("----------------------------------------------------------------------------")
         number = int(input("Enter Option Number:"))
         if number == 1:
-            option1()
-        elif number == 2:
             option2()
-        elif number == 3:
+        elif number == 2:
             option3()
+        elif number == 0:
+            break
         else:
             print("Invalid Entry")
             number = int(input("\nEnter Option Number:"))
-       
+
+        
+    
 
       
 def option2():
     fileName= open('Crimes.csv')
     Csv_fileName = csv.reader(fileName)
+    next(Csv_fileName, None)
 
     district = input("What district, 1-25, do you want specifics on? ")
 
@@ -107,8 +111,6 @@ def option2():
     
 
     for row in Csv_fileName:
-        if row[0] == "ID":
-            continue
         overall_total += 1
         if row[8] == "true":
             overall_arrest_total += 1
@@ -184,8 +186,6 @@ def option2():
                     kidnappingT += 1
                 if row[5] == "INTIMIDATION":
                     intimidationT += 1
-        if row[0] == "ID":
-            continue
         if int(row[11]) == int(district):
             district_crime_total += 1
             if row[5] == "LIQUOR LAW VIOLATION":
@@ -259,55 +259,16 @@ def option2():
             if row[5] == "INTIMIDATION":
                     intimidationTC += 1     
 
-    print("Total number of crimes in Chicago:", overall_total)    
-    print("The total number of crimes for the district, resulting in arrest, is: ",district_total)
-    print("This district holds", (district_total / overall_arrest_total) * 100 ,"% of the arrests for Chicago")
-    print("The total number of crimes in Chicago is:", overall_total)
-    print(" Liquor Law Violations:",liquorD)
-    print(" Robberies:",robberyD)
-    print(" Thefts:",theftD)
-    print(" Offenses involving children:",offense_involving_childrenD)
-    print(" Assaults:",assaultD)
-    print(" Batteries:", batteryD)
-    print(" Burglaries:", burglaryD)
-    print(" Sexual Assaults:", sexual_assaultD)
-    print(" Narcotics:", narcoticsD)
-    print(" Criminal Damages:", criminal_damageD)
-    print(" Weapons Violations:", weapons_violationD)
-    print(" Deceptive Practices:", deceptive_practiceD)
-    print(" Homicides:", homicideD)
-    print(" Arsons:", arsonD)
-    print(" Criminal Trespassing:", criminal_trespassD)
-    print(" Kidnappings:", kidnappingD)
-    print(" Intimidation:", intimidationD)
+    print("\nTotal number of crimes in Chicago:", overall_total)    
+    print("Total number of crimes for the district: ",district_crime_total)
+    print("This district holds {0:0.4}".format((district_total / overall_total) * 100) ,"% of the crimes for Chicago \n")
 
-    print("\nThe percentage of each crime this district holds is as follows:")
-    print(" Liquor Law Violations:",(liquorD / (liquorD + liquorT)) * 100, "%")
-    print(" Robberies:",(robberyD / (robberyD + robberyT)) * 100, "%")
-    print(" Thefts:",(theftD / (theftD + theftT)) * 100, "%") 
-    print(" Offenses involving children:",(offense_involving_childrenD / (offense_involving_childrenD + offense_involving_childrenT)) * 100, "%")
-    print(" Assaults:",(assaultD / (assaultD + assaultT)) * 100, "%")
-    print(" Batteries:", (batteryD / (batteryD + batteryT)) * 100, "%")
-    print(" Burglaries:", (burglaryD / (burglaryD + burglaryT)) * 100, "%")
-    print(" Sexual Assaults:", (sexual_assaultD / (sexual_assaultD + sexual_assaultT)) * 100, "%")
-    print(" Narcotics:", (narcoticsD / (narcoticsD + narcoticsT)) * 100, "%")
-    print(" Criminal Damages:", (criminal_damageD / (criminal_damageD + criminal_damageT)) * 100, "%")
-    print(" Weapons Violations:", (weapons_violationD / (weapons_violationD + weapons_violationT)) * 100, "%")
-    print(" Deceptive Practices:", (deceptive_practiceD / (deceptive_practiceD + deceptive_practiceT)) * 100, "%")
-    print(" Homicides:", (homicideD / (homicideD + homicideT)) * 100, "%")
-    print(" Arsons:", (arsonD / (arsonD + arsonT)) * 100, "%")
-    print(" Criminal Trespassing:", (criminal_trespassD / (criminal_trespassD + criminal_trespassT)) * 100, "%")
-    print(" Kidnappings:", (kidnappingD / (kidnappingD + kidnappingT)) * 100, "%")
-    print(" Intimidation:", (intimidationD / (intimidationD + intimidationT)) * 100, "%")
 
-    print(" ")
-    print("The total number of crimes for the district is: ",district_total)
-    print("This district holds", (district_total / overall_total) * 100 ,"% of the crimes for Chicago")
-    print("The total number of crimes in Chicago is:", overall_total)
+    print("Number of each crime:")
     print(" Liquor Law Violations:",liquorDC)
     print(" Robberies:",robberyDC)
     print(" Thefts:",theftDC)
-    print(" Offenses involving children:",offense_involving_childrenDC)
+    print(" Offenses Involving Children:",offense_involving_childrenDC)
     print(" Assaults:",assaultDC)
     print(" Batteries:", batteryDC)
     print(" Burglaries:", burglaryDC)
@@ -322,43 +283,90 @@ def option2():
     print(" Kidnappings:", kidnappingDC)
     print(" Intimidation:", intimidationDC)
 
-    print("\nThe percentage of each crime this district holds is as follows:")
-    print(" Liquor Law Violations:",(liquorDC / (liquorDC + liquorTC)) * 100, "%")
-    print(" Robberies:",(robberyDC / (robberyDC + robberyTC)) * 100, "%")
-    print(" Thefts:",(theftDC / (theftDC + theftTC)) * 100, "%") 
-    print(" Offenses involving children:",(offense_involving_childrenDC / (offense_involving_childrenDC + offense_involving_childrenTC)) * 100, "%")
-    print(" Assaults:",(assaultDC / (assaultDC + assaultTC)) * 100, "%")
-    print(" Batteries:", (batteryDC / (batteryDC + batteryTC)) * 100, "%")
-    print(" Burglaries:", (burglaryDC / (burglaryDC + burglaryTC)) * 100, "%")
-    print(" Sexual Assaults:", (sexual_assaultDC / (sexual_assaultDC + sexual_assaultTC)) * 100, "%")
-    print(" Narcotics:", (narcoticsDC / (narcoticsDC + narcoticsTC)) * 100, "%")
-    print(" Criminal Damages:", (criminal_damageDC / (criminal_damageDC + criminal_damageTC)) * 100, "%")
-    print(" Weapons Violations:", (weapons_violationDC / (weapons_violationDC + weapons_violationTC)) * 100, "%")
-    print(" Deceptive Practices:", (deceptive_practiceDC / (deceptive_practiceDC + deceptive_practiceTC)) * 100, "%")
-    print(" Homicides:", (homicideDC / (homicideDC + homicideTC)) * 100, "%")
-    print(" Arsons:", (arsonDC / (arsonDC + arsonTC)) * 100, "%")
-    print(" Criminal Trespassing:", (criminal_trespassDC / (criminal_trespassDC + criminal_trespassTC)) * 100, "%")
-    print(" Kidnappings:", (kidnappingDC / (kidnappingDC + kidnappingTC)) * 100, "%")
-    print(" Intimidation:", (intimidationDC / (intimidationDC + intimidationTC)) * 100, "%")
+    
 
-    print("\nThe probability of each crime in this district resulting in an arrest(0 = very unlikely, 1 = very likely):")
-    print(" Liquor Law Violations:",(liquorD / liquorDC) if liquorDC else 0)
-    print(" Robberies:",(robberyD / robberyDC) if robberyDC else 0)
-    print(" Thefts:",(theftD / theftDC) if theftDC else 0) 
-    print(" Offenses involving children:",(offense_involving_childrenD / offense_involving_childrenDC) if offense_involving_childrenDC else 0)
-    print(" Assaults:",(assaultD / assaultDC) if assaultDC else 0)
-    print(" Batteries:", (batteryD / batteryDC) if batteryDC else 0)
-    print(" Burglaries:", (burglaryD / burglaryDC) if burglaryDC else 0)
-    print(" Sexual Assaults:", (sexual_assaultD / sexual_assaultDC) if sexual_assaultDC else 0)
-    print(" Narcotics:", (narcoticsD / narcoticsDC) if narcoticsDC else 0)
-    print(" Criminal Damages:", (criminal_damageD / criminal_damageDC) if criminal_damageDC else 0)
-    print(" Weapons Violations:", (weapons_violationD / weapons_violationDC) if weapons_violationDC else 0)
-    print(" Deceptive Practices:", (deceptive_practiceD / deceptive_practiceDC) if deceptive_practiceDC else 0)
-    print(" Homicides:", (homicideD / homicideDC) if homicideDC else 0)
-    print(" Arsons:", (arsonD / arsonDC) if arsonDC else 0)
-    print(" Criminal Trespassing:", (criminal_trespassD / criminal_trespassDC) if criminal_trespassDC else 0)
-    print(" Kidnappings:", (kidnappingD / kidnappingDC) if kidnappingDC else 0)
-    print(" Intimidation:", (intimidationD / intimidationDC) if intimidationDC else 0)
+
+    
+
+
+    print("\nThe percentage of each crime this district holds:")
+    print(" Liquor Law Violations:{0:0.4}".format((liquorDC / (liquorDC + liquorTC)) * 100), "%")
+    print(" Robberies:{0:0.4}".format((robberyDC / (robberyDC + robberyTC)) * 100), "%")
+    print(" Thefts:{0:0.4}".format((theftDC / (theftDC + theftTC)) * 100), "%") 
+    print(" Offenses Involving Children:{0:0.4}".format((offense_involving_childrenDC / (offense_involving_childrenDC + offense_involving_childrenTC)) * 100), "%")
+    print(" Assaults:{0:0.4}".format((assaultDC / (assaultDC + assaultTC)) * 100), "%")
+    print(" Batteries:{0:0.4}".format((batteryDC / (batteryDC + batteryTC)) * 100), "%")
+    print(" Burglaries:{0:0.4}".format((burglaryDC / (burglaryDC + burglaryTC)) * 100), "%")
+    print(" Sexual Assaults:{0:0.4}".format((sexual_assaultDC / (sexual_assaultDC + sexual_assaultTC)) * 100), "%")
+    print(" Narcotics:{0:0.4}".format((narcoticsDC / (narcoticsDC + narcoticsTC)) * 100), "%")
+    print(" Criminal Damages:{0:0.4}".format((criminal_damageDC / (criminal_damageDC + criminal_damageTC)) * 100), "%")
+    print(" Weapons Violations:{0:0.4}".format((weapons_violationDC / (weapons_violationDC + weapons_violationTC)) * 100), "%")
+    print(" Deceptive Practices:{0:0.4}".format((deceptive_practiceDC / (deceptive_practiceDC + deceptive_practiceTC)) * 100), "%")
+    print(" Homicides:{0:0.4}".format((homicideDC / (homicideDC + homicideTC)) * 100), "%")
+    print(" Arsons:{0:0.4}".format((arsonDC / (arsonDC + arsonTC)) * 100), "%")
+    print(" Criminal Trespassing:{0:0.4}".format((criminal_trespassDC / (criminal_trespassDC + criminal_trespassTC)) * 100), "%")
+    print(" Kidnappings:{0:0.4}".format((kidnappingDC / (kidnappingDC + kidnappingTC)) * 100), "%")
+    print(" Intimidation:{0:0.4}".format((intimidationDC / (intimidationDC + intimidationTC)) * 100), "%")
+
+    print("Total number of crimes for the district, resulting in arrest: ",district_total)
+    print("This district holds {0:0.4}".format((district_total / overall_arrest_total) * 100) ,"% of the arrests for Chicago\n")
+    
+    print("\nArrests for each crime:\n Liquor Law Violations:",liquorD)
+    print(" Robberies:",robberyD)
+    print(" Thefts:",theftD)
+    print(" Offenses Involving Children:",offense_involving_childrenD)
+    print(" Assaults:",assaultD)
+    print(" Batteries:", batteryD)
+    print(" Burglaries:", burglaryD)
+    print(" Sexual Assaults:", sexual_assaultD)
+    print(" Narcotics:", narcoticsD)
+    print(" Criminal Damages:", criminal_damageD)
+    print(" Weapons Violations:", weapons_violationD)
+    print(" Deceptive Practices:", deceptive_practiceD)
+    print(" Homicides:", homicideD)
+    print(" Arsons:", arsonD)
+    print(" Criminal Trespassing:", criminal_trespassD)
+    print(" Kidnappings:", kidnappingD)
+    print(" Intimidation:", intimidationD)
+
+    print("\nThe percentage of each crime, resuting in arrest, this district holds:")
+    print(" Liquor Law Violations:{0:0.4}".format((liquorD / (liquorD + liquorT)) * 100), "%")
+    print(" Robberies:{0:0.4}".format((robberyD / (robberyD + robberyT)) * 100), "%")
+    print(" Thefts:{0:0.4}".format((theftD / (theftD + theftT)) * 100), "%") 
+    print(" Offenses Involving Children:{0:0.4}".format((offense_involving_childrenD / (offense_involving_childrenD + offense_involving_childrenT)) * 100), "%")
+    print(" Assaults:{0:0.4}".format((assaultD / (assaultD + assaultT)) * 100), "%")
+    print(" Batteries:{0:0.4}".format((batteryD / (batteryD + batteryT)) * 100), "%")
+    print(" Burglaries:{0:0.4}".format((burglaryD / (burglaryD + burglaryT)) * 100), "%")
+    print(" Sexual Assaults:{0:0.4}".format((sexual_assaultD / (sexual_assaultD + sexual_assaultT)) * 100), "%")
+    print(" Narcotics:{0:0.4}".format((narcoticsD / (narcoticsD + narcoticsT)) * 100), "%")
+    print(" Criminal Damages:{0:0.4}".format((criminal_damageD / (criminal_damageD + criminal_damageT)) * 100), "%")
+    print(" Weapons Violations:{0:0.4}".format((weapons_violationD / (weapons_violationD + weapons_violationT)) * 100), "%")
+    print(" Deceptive Practices:{0:0.4}".format((deceptive_practiceD / (deceptive_practiceD + deceptive_practiceT)) * 100), "%")
+    print(" Homicides:{0:0.4}".format((homicideD / (homicideD + homicideT)) * 100), "%")
+    print(" Arsons:{0:0.4}".format((arsonD / (arsonD + arsonT)) * 100), "%")
+    print(" Criminal Trespassing:{0:0.4}".format((criminal_trespassD / (criminal_trespassD + criminal_trespassT)) * 100), "%")
+    print(" Kidnappings:{0:0.4}".format((kidnappingD / (kidnappingD + kidnappingT)) * 100), "%")
+    print(" Intimidation:{0:0.4}".format((intimidationD / (intimidationD + intimidationT)) * 100), "%")
+
+    print("\nThe probability of each crime in this district resulting in an arrest\n(0 = very unlikely, 1 = very likely):")
+    print(" Liquor Law Violations:{0:0.4}".format(liquorD / liquorDC) if liquorDC else 0)
+    print(" Robberies:{0:0.4}".format(robberyD / robberyDC) if robberyDC else 0)
+    print(" Thefts:{0:0.4}".format(theftD / theftDC) if theftDC else 0) 
+    print(" Offenses Involving Children:{0:0.4}".format(offense_involving_childrenD / offense_involving_childrenDC) if offense_involving_childrenDC else 0)
+    print(" Assaults:{0:0.4}".format(assaultD / assaultDC) if assaultDC else 0)
+    print(" Batteries:{0:0.4}".format(batteryD / batteryDC) if batteryDC else 0)
+    print(" Burglaries:{0:0.4}".format(burglaryD / burglaryDC) if burglaryDC else 0)
+    print(" Sexual Assaults:{0:0.4}".format(sexual_assaultD / sexual_assaultDC) if sexual_assaultDC else 0)
+    print(" Narcotics:{0:0.4}".format(narcoticsD / narcoticsDC) if narcoticsDC else 0)
+    print(" Criminal Damages:{0:0.4}".format(criminal_damageD / criminal_damageDC) if criminal_damageDC else 0)
+    print(" Weapons Violations:{0:0.4}".format(weapons_violationD / weapons_violationDC) if weapons_violationDC else 0)
+    print(" Deceptive Practices:{0:0.4}".format(deceptive_practiceD / deceptive_practiceDC) if deceptive_practiceDC else 0)
+    print(" Homicides:{0:0.4}".format(homicideD / homicideDC) if homicideDC else 0)
+    print(" Arsons:{0:0.4}".format(arsonD / arsonDC) if arsonDC else 0)
+    print(" Criminal Trespassing:{0:0.4}".format(criminal_trespassD / criminal_trespassDC) if criminal_trespassDC else 0)
+    print(" Kidnappings:{0:0.4}".format(kidnappingD / kidnappingDC) if kidnappingDC else 0)
+    print(" Intimidation:{0:0.4}".format(intimidationD / intimidationDC) if intimidationDC else 0)
+    print(" \n")
 
 
 
@@ -456,11 +464,11 @@ def option3():
 
 
     #print 1st batch of information           
-    print("The number of reported crimes:" , crime_count)
+    print("\nThe number of reported crimes:" , crime_count)
     print("The number of arrests:" , arrest_count)
     print("The number of cases without arrests:", not_arrested)
     print("The number of cases involving domestic violence:" , domestic_count)
-    print("About", arrest_percentage,"% of total reported crimes resulted in an arrest") #round to 4 decimal points
+    print("About {0:0.4}".format(arrest_percentage),"% of total reported crimes resulted in an arrest") #round to 4 decimal points
 
     crimes = []
     robbery = 0
@@ -524,23 +532,24 @@ def option3():
 
     d={}
 
-    d['Liquor Law Violation'] = liquor
-    d['Weapons Violation'] = weapons_violation
-    d['Arson'] = arson
-    d['Kidnapping'] = kidnapping
-    d['Intimidation'] = intimidation
-    d['Robbery'] = robbery
-    d['Theft'] = theft
-    d['Offense Involving Children'] = offense_involving_children
-    d['Assault'] = assault
-    d['Battery'] = battery
-    d['Burglary'] = burglary
-    d['Sexual Assault or Sex Offense'] = sexual_assault
-    d['Narcotics'] = narcotics
-    d['Criminal Damage'] = criminal_damage
-    d['Deveptive Practice'] = deceptive_practice
-    d['Homicide'] = homicide
-    d['Other'] = other
+    d[' Liquor Law Violation'] = liquor
+    d[' Weapons Violation'] = weapons_violation
+    d[' Arson'] = arson
+    d[' Kidnapping'] = kidnapping
+    d[' Intimidation'] = intimidation
+    d[' Robbery'] = robbery
+    d[' Theft'] = theft
+    d[' Offense Involving Children'] = offense_involving_children
+    d[' Assault'] = assault
+    d[' Battery'] = battery
+    d[' Burglary'] = burglary
+    d[' Sexual Assault or Sex Offense'] = sexual_assault
+    d[' Narcotics'] = narcotics
+    d[' Criminal Damage'] = criminal_damage
+    d[' Deveptive Practice'] = deceptive_practice
+    d[' Criminal Trespassing'] = criminal_trespass
+    d[' Homicide'] = homicide
+    d[' Other'] = other
 
     
     #print list of most frequent to least frequent
@@ -551,23 +560,24 @@ def option3():
 
     #number of each crime has resulted in arrest
     c = {}
-    c['Liquor Law Violation'] = liquor1
-    c['Weapons Violation'] = weapons_violation1
-    c['Arson'] = arson1
-    c['Kidnapping'] = kidnapping1
-    c['Intimidation'] = intimidation1
-    c['Robbery'] = robbery1
-    c['Theft'] = theft1
-    c['Offense Involving Children'] = offense_involving_children1
-    c['Assault'] = assault1
-    c['Battery'] = battery1
-    c['Burglary'] = burglary1
-    c['Sexual Assault or Sex Offense'] = sexual_assault1
-    c['Narcotics'] = narcotics1
-    c['Criminal Damage'] = criminal_damage1
-    c['Deveptive Practice'] = deceptive_practice1
-    c['Homicide'] = homicide1
-    c['Other'] = other1
+    c[' Liquor Law Violation'] = liquor1
+    c[' Weapons Violation'] = weapons_violation1
+    c[' Arson'] = arson1
+    c[' Kidnapping'] = kidnapping1
+    c[' Intimidation'] = intimidation1
+    c[' Robbery'] = robbery1
+    c[' Theft'] = theft1
+    c[' Offense Involving Children'] = offense_involving_children1
+    c[' Assault'] = assault1
+    c[' Battery'] = battery1
+    c[' Burglary'] = burglary1
+    c[' Sexual Assault or Sex Offense'] = sexual_assault1
+    c[' Narcotics'] = narcotics1
+    c[' Criminal Damage'] = criminal_damage1
+    c[' Deveptive Practice'] = deceptive_practice1
+    c[' Criminal Trespassing'] = criminal_trespass1 
+    c[' Homicide'] = homicide1
+    c[' Other'] = other1
 
     
     #Cimes that lead to an arrest list from most to least frequent
@@ -577,62 +587,63 @@ def option3():
     
 
     #Percetages of crimes
-    print("\n\nPercetages:\n Robberies:", (robbery/crime_count) *100, "%")
-    print(" Thefts:", (theft/crime_count) *100, "%")
-    print(" Liquor Law Violations:", (liquor/crime_count) *100, "%")
-    print(" Criminal Tresspass:", (criminal_trespass/crime_count) *100, "%")
-    print(" Arson:", (arson/crime_count) *100, "%")
-    print(" Offenses Involving Children:", (offense_involving_children/ crime_count) *100, "%")
-    print(" Assault:", (assault/crime_count) *100, "%")
-    print(" Battery:", (battery/crime_count) *100, "%")
-    print(" Burglary:", (burglary/crime_count) *100, "%")
-    print(" Sexual Assault:", (sexual_assault/crime_count) *100, "%")
-    print(" Narcotics:", (narcotics/crime_count) *100, "%")
-    print(" Criminal Damage:", (criminal_damage/crime_count) *100, "%")
-    print(" Deceptive Practice:", (deceptive_practice/crime_count) *100, "%")
-    print(" Kidnapping:", (kidnapping/crime_count) *100, "%")
-    print(" Intimidation:", (intimidation/crime_count) *100, "%")
-    print(" Homicide:", (homicide/crime_count) *100, "%")
-    print(" Other:", (other/crime_count) *100, "%")
+    print("\n\nPercent of crime:\n Robberies:{0:0.4}".format((robbery/crime_count) *100), "%")
+    print(" Thefts:{0:0.4}".format((theft/crime_count) *100), "%")
+    print(" Liquor Law Violations:{0:0.4}".format((liquor/crime_count) *100), "%")
+    print(" Criminal Tresspass:{0:0.4}".format((criminal_trespass/crime_count) *100), "%")
+    print(" Arson:{0:0.4}".format((arson/crime_count) *100), "%")
+    print(" Offenses Involving Children:{0:0.4}".format((offense_involving_children/ crime_count) *100), "%")
+    print(" Assault:{0:0.4}".format((assault/crime_count) *100), "%")
+    print(" Battery:{0:0.4}".format((battery/crime_count) *100), "%")
+    print(" Burglary:{0:0.4}".format((burglary/crime_count) *100), "%")
+    print(" Sexual Assault:{0:0.4}".format((sexual_assault/crime_count) *100), "%")
+    print(" Narcotics:{0:0.4}".format((narcotics/crime_count) *100), "%")
+    print(" Criminal Damage:{0:0.4}".format((criminal_damage/crime_count) *100), "%")
+    print(" Deceptive Practice:{0:0.4}".format((deceptive_practice/crime_count) *100), "%")
+    print(" Kidnapping:{0:0.4}".format((kidnapping/crime_count) *100), "%")
+    print(" Intimidation:{0:0.4}".format((intimidation/crime_count) *100), "%")
+    print(" Homicide:{0:0.4}".format((homicide/crime_count) *100), "%")
+    print(" Other:{0:0.4}".format((other/crime_count) *100), "%")
 
 
     #print probability of crime being reported 
-    print("\n\nProbability of crime being reported (0 = very unlikely, 1 = very likely)\n Robberies:", (robbery/crime_count))
-    print(" Thefts:", (theft / crime_count) )
-    print(" Liquor Law Violations:", (liquor/crime_count))
-    print(" Criminal Tresspass:", (criminal_trespass/crime_count))
-    print(" Arson:", (arson/crime_count))
-    print(" Offenses Involving Children:", (offense_involving_children/crime_count))
-    print(" Assault:", (assault/crime_count))
-    print(" Battery:", (battery/crime_count))
-    print(" Burglary:", (burglary/crime_count))
-    print(" Sexual Assault:", (sexual_assault/crime_count))
-    print(" Narcotics:", (narcotics/crime_count))
-    print(" Criminal Damage:", (criminal_damage/crime_count))
-    print(" Deceptive Practice:", (deceptive_practice/crime_count))
-    print(" Kidnapping:", (kidnapping/crime_count))
-    print(" Intimidation:", (intimidation/crime_count))
-    print(" Homicide:", (homicide/crime_count))
-    print(" Other:", (other/crime_count))
+    print("\n\nProbability of crime being reported \n(0 = very unlikely, 1 = very likely)\n Robberies:{0:0.4}".format(robbery/crime_count))
+    print(" Thefts:{0:0.4}".format(theft / crime_count) )
+    print(" Liquor Law Violations:{0:0.4}".format(liquor/crime_count))
+    print(" Criminal Tresspass:{0:0.4}".format(criminal_trespass/crime_count))
+    print(" Arson:{0:0.4}".format(arson/crime_count))
+    print(" Offenses Involving Children:{0:0.4}".format(offense_involving_children/crime_count))
+    print(" Assault:{0:0.4}".format(assault/crime_count))
+    print(" Battery:{0:0.4}".format(battery/crime_count))
+    print(" Burglary:{0:0.4}".format(burglary/crime_count))
+    print(" Sexual Assault:{0:0.4}".format(sexual_assault/crime_count))
+    print(" Narcotics:{0:0.4}".format(narcotics/crime_count))
+    print(" Criminal Damage:{0:0.4}".format(criminal_damage/crime_count))
+    print(" Deceptive Practice:{0:0.4}".format(deceptive_practice/crime_count))
+    print(" Kidnapping:{0:0.4}".format(kidnapping/crime_count))
+    print(" Intimidation:{0:0.4}".format(intimidation/crime_count))
+    print(" Homicide:{0:0.4}".format(homicide/crime_count))
+    print(" Other:{0:0.4}".format(other/crime_count))
 
 
     #probability of being arrested for a crime
-    print("\n\nProbability of each crime resulting in an arrest (0 = very unlikely, 1 = very likely)\n Robberies:", (robbery/crime_count))
-    print(" Thefts:", (theft1 / theft) )
-    print(" Liquor Law Violations:", (liquor1 / liquor))
-    print(" Criminal Tresspass:", (criminal_trespass1 /criminal_trespass))
-    print(" Arson:", (arson1/arson))
-    print(" Offenses Involving Children:", (offense_involving_children1 / offense_involving_children))
-    print(" Assault:", (assault1 / assault ))
-    print(" Battery:", (battery1 / battery))
-    print(" Burglary:", (burglary1 / burglary))
-    print(" Sexual Assault:", (sexual_assault/sexual_assault))
-    print(" Narcotics:", (narcotics1 /narcotics))
-    print(" Criminal Damage:", (criminal_damage1/criminal_damage))
-    print(" Deceptive Practice:", (deceptive_practice1 /deceptive_practice))
-    print(" Kidnapping:", (kidnapping1 /kidnapping))
-    print(" Intimidation:", (intimidation1 /intimidation))
-    print(" Homicide:", (homicide1/homicide))
-    print(" Other:", (other1/ other))
-
+    print("\n\nProbability of each crime resulting in an arrest \n(0 = very unlikely, 1 = very likely)\n Robberies: {0:0.4}".format(robbery/crime_count))
+    print(" Thefts: {0:0.4}".format(theft1 / theft))
+    print(" Liquor Law Violations:{0:0.4}".format(liquor1 / liquor))
+    print(" Criminal Tresspass:{0:0.4}".format(criminal_trespass1 /criminal_trespass))
+    print(" Arson:{0:0.4}".format(arson1/arson))
+    print(" Offenses Involving Children:{0:0.4}".format(offense_involving_children1 / offense_involving_children))
+    print(" Assault:{0:0.4}".format(assault1 / assault ))
+    print(" Battery:{0:0.4}".format(battery1 / battery))
+    print(" Burglary:{0:0.4}".format(burglary1 / burglary))
+    print(" Sexual Assault:{0:0.4}".format(sexual_assault/sexual_assault))
+    print(" Narcotics:{0:0.4}".format(narcotics1 /narcotics))
+    print(" Criminal Damage:{0:0.4}".format(criminal_damage1/criminal_damage))
+    print(" Deceptive Practice:{0:0.4}".format(deceptive_practice1 /deceptive_practice))
+    print(" Kidnapping:{0:0.4}".format(kidnapping1 /kidnapping))
+    print(" Intimidation:{0:0.4}".format(intimidation1 /intimidation))
+    print(" Homicide:{0:0.4}".format(homicide1/homicide))
+    print(" Other:{0:0.4}".format(other1/ other))
+    print(" \n")
+    
 main()
